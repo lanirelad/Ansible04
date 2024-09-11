@@ -30,10 +30,8 @@ def mainPage():
     counter += 1
     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     random_quote = random.choice(quotes)
-    currentHostIp = socket.gethostbyname(socket.gethostname())
     
     return (f"<h1>Ansible 2.1 HW Submission!</h1>"
-            f"<p><strong>This PC Host IP:</strong> {currentHostIp}</p>"
             f"<p><strong>Linode Host IP:</strong> {hostIp}</p>"
             f"<p><strong>Request Count:</strong> {counter}</p>"
             f"<p><strong>Time of Request:</strong> {current_time}</p>"
