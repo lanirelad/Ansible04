@@ -26,7 +26,7 @@ quotes = [
 
 @app.route('/')
 def mainPage():
-    global counter
+    global counter, host_ip 
     counter += 1
     currentTime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     randomQuote = random.choice(quotes)
