@@ -34,7 +34,7 @@ def mainPage():
     return render_template("main.html", hostIp=host_ip, counter=counter, currentTime=currentTime, randomQuote=randomQuote)
 
 
-@app.route('/webhook', method=['POST'])
+@app.route('/webhook', methods=['POST'])
 def webhookRequest():
     print(f"Webhook request is being processed", flush=True)
     return 'Webhook received', 200
