@@ -33,11 +33,11 @@ def mainPage():
     randomQuote = random.choice(quotes)
     return render_template("main.html", hostIp=host_ip, counter=counter, currentTime=currentTime, randomQuote=randomQuote)
 
-#
-# @app.route('/webhook', method=['POST'])
-# def webhookRequest():
-#     print(f"Webhook request is being processed", flush=True)
-#     return 'Webhook received', 200
+
+@app.route('/webhook', method=['POST'])
+def webhookRequest():
+    print(f"Webhook request is being processed", flush=True)
+    return 'Webhook received', 200
 
 
 if __name__ == '__main__':
