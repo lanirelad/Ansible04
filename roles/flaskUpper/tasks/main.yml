@@ -55,7 +55,10 @@
   ignore_errors: yes
 
 - name: Start Flask application in virtual env
-  command: /opt/flaskApp/venv/bin/python3 main.py
+  # command: /opt/flaskApp/venv/bin/python3 main.py
+  shell: |
+    source /opt/flaskApp/venv/bin/activate
+    nohup python /opt/flaskApp/main.py > /opt/flaskApp/app.log 2>&1 &
   args:
     chdir: /opt/flaskApp/
   environment:
