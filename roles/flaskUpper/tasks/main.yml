@@ -64,16 +64,14 @@
   async: 120
   poll: 0
 
-
-- name: Copy main.html file
-  tags: apache, index, file
-  copy:
-    src: main.html
-    dest: /var/www/html/index.html
-
-
 - name: Resolve template main.html and copy to web server
   tags: apache, index, file
   template:
     src: main.html
     dest: /var/www/html/main.html
+
+- name: Restart Apache service after copying templates
+  tags: apache, restart
+  service:
+    name: apache2
+    state: restarted
