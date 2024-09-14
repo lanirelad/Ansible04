@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request
+from flask import Flask, request, render_template
 import socket
 import datetime
 import random
@@ -31,11 +31,15 @@ def mainPage():
     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     random_quote = random.choice(quotes)
     
-    return (f"<h1>Ansible 2.1 HW Submission!</h1>"
-            f"<p><strong>Linode Host IP:</strong> {hostIp}</p>"
-            f"<p><strong>Request Count:</strong> {counter}</p>"
-            f"<p><strong>Time of Request:</strong> {current_time}</p>"
-            f"<blockquote><i>{random_quote}</i></blockquote>")
+    return render_template("main.html", hostIp=hostIp, counter=counter, current_time=current_time,
+                           random_quote=random_quote)
+
+
+# @app.route('/webhook', method=['POST'])
+# def webhookRequest():
+#     print(f"Webhook request is being processed", flush=True)
+#     return 'Webhook received', 200
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)
