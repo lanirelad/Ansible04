@@ -31,7 +31,7 @@ def mainPage():
     currentTime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     randomQuote = random.choice(quotes)
     host_ip = os.getenv('HOST_IP', 'Unknown IP')
-    return render_template("main.html", hostIp=host_ip,counter=counter,currentTime=currentTime,randomQuote=randomQuote)
+    return render_template("index.html", hostIp=host_ip,counter=counter,currentTime=currentTime,randomQuote=randomQuote)
 
 #
 # @app.route('/webhook', method=['POST'])
