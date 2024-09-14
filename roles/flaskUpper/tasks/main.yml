@@ -54,11 +54,6 @@
   shell: fuser -k 3000/tcp || true
   ignore_errors: yes
 
-- name: run flask app
-  shell: |
-    . /opt/flaskApp/venv/bin/activate
-    nohup python /opt/flaskApp/main.py > /opt/flaskApp/app.log 2>&1 &
-
 - name: Start Flask application in virtual env
   command: /opt/flaskApp/venv/bin/python3 main.py
   args:
@@ -67,6 +62,12 @@
     HOST_IP: "{{ ansible_host }}"
   async: 120
   poll: 0
+
+# - name: run flask app
+#   shell: |
+#     . /opt/flaskApp/venv/bin/activate
+#     nohup python /opt/flaskApp/main.py > /opt/flaskApp/app.log 2>&1 &
+
 
 - name: Resolve template main.html and copy to web server
   tags: apache, index, file
