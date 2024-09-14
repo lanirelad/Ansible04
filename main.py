@@ -31,7 +31,7 @@ def mainPage():
     currentTime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     randomQuote = random.choice(quotes)
     print(host_ip)
-    return render_template("main.html", hostIp=host_ip, counter=counter, currentTime=currentTime,
+    return render_template("main.html", hostIp=172.232.204.146, counter=counter, currentTime=currentTime,
                            randomQuote=randomQuote)
 
 
