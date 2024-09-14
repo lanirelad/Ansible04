@@ -8,7 +8,7 @@ app = Flask(__name__)
 counter = 0
 
 # retrieve the host IP from the inventory file
-hostIp = os.getenv('HOST_IP', 'Unknown IP')
+host_Ip = os.getenv('HOST_IP', 'Unknown IP')
 
 # just to make it a little interesting
 quotes = [
@@ -31,7 +31,7 @@ def mainPage():
     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     random_quote = random.choice(quotes)
     
-    return render_template("main.html", hostIp=hostIp, counter=counter, current_time=current_time,
+    return render_template("main.html", hostIp=host_Ip, counter=counter, current_time=current_time,
                            random_quote=random_quote)
 
 
