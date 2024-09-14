@@ -56,8 +56,8 @@
 
 - name: run flask app
   shell: |
-    . /opt/simpleFlask/venv/bin/activate
-    nohup python3 /opt/simpleFlask/app.py > /opt/simpleFlask/app.log 2>&1 &
+    . /opt/flaskApp/venv/bin/activate
+    nohup python3 /opt/flaskApp/app.py > /opt/simpleFlask/app.log 2>&1 &
 
 - name: Start Flask application in virtual env
   command: /opt/flaskApp/venv/bin/python3 main.py
