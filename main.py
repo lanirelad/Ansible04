@@ -8,7 +8,8 @@ app = Flask(__name__)
 
 
 # retrieve the host IP from the inventory file
-host_ip = None
+host_ip =  os.getenv('HOST_IP', 'Unknown IP')
+# initialize the counter var
 counter = 0
 # just to make it a little interesting
 quotes = [
@@ -30,8 +31,7 @@ def mainPage():
     counter += 1
     currentTime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     randomQuote = random.choice(quotes)
-    host_ip = os.getenv('HOST_IP', 'Unknown IP')
-    return render_template("main.html", hostIp=host_ip,counter=counter,currentTime=currentTime,randomQuote=randomQuote)
+    return render_template("main.html", hostIp=host_ip, counter=counter, currentTime=currentTime, randomQuote=randomQuote)
 
 #
 # @app.route('/webhook', method=['POST'])
