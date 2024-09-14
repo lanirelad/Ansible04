@@ -5,11 +5,11 @@ import datetime
 import random
 
 app = Flask(__name__)
-counter = 0
+
 
 # retrieve the host IP from the inventory file
-host_ip = os.getenv('HOST_IP', 'Unknown IP')
-
+host_ip = None
+counter = 0
 # just to make it a little interesting
 quotes = [
     "Believe you can and you're halfway there.",
