@@ -1,0 +1,79 @@
+- name: Install dependencies
+  apt:
+    name:
+      - python3
+      - python3-pip
+      - python3-venv
+    update_cache: yes
+
+- name: Install apache2 and PHP packages 
+  tags: apache, php, install
+  package: #apt yum (ubuntu/centos)
+    name: 
+      - '{{ apache }}'
+      - '{{ php }}'
+    update_cache: yes
+    state: latest
+
+- name: Start Apache Centos
+  tags: apache, start
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+  when: ansible_distribution == 'CentOS'
+  
+- name: Open port 80
+  tags: apache, port
+  firewalld:
+    port: 80/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+  when: ansible_distribution == 'CentOS'
+
+- name: Clone Flask app repository
+  git:
+    repo: 'https://github.com/lanirelad/Ansible04.git'
+    dest: /opt/flaskApp/
+    version: 'Ansible03HW'
+    update: yes
+    force: yes
+
+- name: Create a virtual environment
+  command: python3 -m venv /opt/flaskApp/venv
+  args:
+    creates: /opt/flaskApp/venv
+
+- name: Install Flask dependencies in virtual env
+  command: /opt/flaskApp/venv/bin/pip install -r /opt/flaskApp/requirements.txt
+  args:
+    chdir: /opt/flaskApp/
+
+- name: stop any process running on port 3000
+  shell: fuser -k 3000/tcp || true
+  ignore_errors: yes
+
+
+- name: Start Flask application in virtual env
+  command: /opt/flaskApp/venv/bin/python3 main.py
+  args:
+    chdir: /opt/flaskApp/
+  environment:
+    HOST_IP: "{{ ansible_host }}"
+  async: 120
+  poll: 0
+
+
+- name: Copy main.html file
+  tags: apache, index, file
+  copy:
+    src: main.html
+    dest: /var/www/html/index.html
+
+
+- name: Resolve template main.html and copy to web server
+  tags: apache, index, file
+  template:
+    src: main.html
+    dest: /var/www/html/main.html
