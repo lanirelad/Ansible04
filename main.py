@@ -3,6 +3,7 @@ from flask import Flask, request, render_template
 import socket
 import datetime
 import random
+import json
 
 app = Flask(__name__)
 
@@ -34,10 +35,22 @@ def mainPage():
     return render_template("main.html", hostIp=host_ip, counter=counter, currentTime=currentTime, randomQuote=randomQuote)
 
 
+# @app.route('/webhook', methods=['POST'])
+# def webhookRequest():
+#     print(f"Webhook request is being processed", flush=True)
+#     return 'Webhook received', 200
+
 @app.route('/webhook', methods=['POST'])
 def webhookRequest():
-    print(f"Webhook request is being processed", flush=True)
-    return 'Webhook received', 200
+    webhook_data = request.get_json()
+
+    if webhook_data:
+        with open('webhook_data.json', 'w') as f:
+            json.dump(webhook_data, f, indent=4)
+        print("Webhook data received and saved.", flush=True)
+        return 'Webhook received and saved', 200
+
+    return 'No data', 400
 
 
 if __name__ == '__main__':
