@@ -52,6 +52,16 @@ def webhookRequest():
 
     return 'No data', 400
 
+
+# route to show webhook payload file
+@app.route('/payload')
+def show_payload():
+    with open('/opt/flaskApp/webhook_data.json', 'r') as f:
+        payload_data = f.read()
+     # Wrap the log data in a <pre> tag to preserve formatting
+    return f"<pre>{payload_data}</pre>"
+
+
 # route to show log file
 @app.route('/log')
 def show_log():
