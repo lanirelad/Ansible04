@@ -55,7 +55,7 @@ def webhookRequest():
 # route to show log file
 @app.route('/log')
 def show_log():
-    with open('/opt/simpleFlask/app.log', 'r') as f:
+    with open('/opt/flaskApp/app.log', 'r') as f:
         log_data = f.read()
      # Wrap the log data in a <pre> tag to preserve formatting
     return f"<pre>{log_data}</pre>"
