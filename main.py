@@ -52,6 +52,13 @@ def webhookRequest():
 
     return 'No data', 400
 
+# route to show log file
+@app.route('/log')
+def show_log():
+    with open('/opt/simpleFlask/app.log', 'r') as f:
+        log_data = f.read()
+     # Wrap the log data in a <pre> tag to preserve formatting
+    return f"<pre>{log_data}</pre>"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)
