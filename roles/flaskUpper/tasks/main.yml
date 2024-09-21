@@ -77,11 +77,11 @@
 #     nohup python /opt/flaskApp/main.py > /opt/flaskApp/app.log 2>&1 &
 
 
-- name: Resolve template main.html and copy to web server
-  tags: apache, index, file
-  template:
-    src: main.html
-    dest: /opt/flaskApp/templates
+# - name: Resolve template main.html and copy to web server
+#   tags: apache, index, file
+#   template:
+#     src: main.html
+#     dest: /opt/flaskApp/templates/
 
 # - name: Restart Apache service after copying templates
 #   tags: apache, restart
