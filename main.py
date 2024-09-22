@@ -45,7 +45,7 @@ def webhookRequest():
     webhook_data = request.get_json()
 
     if webhook_data:
-        with open('webhook_data.json', 'w') as f:
+        with open('webhook_data.json', 'a') as f:
             json.dump(webhook_data, f, indent=4)
         print("Webhook data received and saved.", flush=True)
         return 'Webhook received and saved', 200
